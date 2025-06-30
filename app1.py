@@ -16,6 +16,7 @@ st.set_page_config(layout="centered", page_title="Hidrondina - Integrador", page
     initial_sidebar_state="expanded"
     )
 
+
 st.title("Pantalla de Predicción")
 
 st.sidebar.image("https://www.fonafe.gob.pe/pw_content/empresas/38/Img/Hidrandina.png")
