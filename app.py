@@ -39,10 +39,11 @@ st.markdown("---")
 
 @st.cache_data
 def cargar_datos():
-    df = pd.read_csv("data_consumo_ancash.csv")
-    df['PERIODO'] = pd.to_datetime(df['PERIODO'].astype(str).str[:6], format='%Y%m')
-    provincias = sorted(df['PROVINCIA'].unique())
-    return df, provincias
+   df = pd.read_csv("data_consumo_ancash.csv")
+   df['PERIODO'] = pd.to_datetime(df['PERIODO'].astype(str).str[:6], format='%Y%m')
+   provincias = sorted(df['PROVINCIA'].unique())
+   return df, provincias
+
 
 # Funciones auxiliares
 def calcular_metricas(y_true, y_pred):
