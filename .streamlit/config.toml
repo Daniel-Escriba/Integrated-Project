@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#1f77b4"  # Azul elegante para botones y resaltados
+backgroundColor = "#2c2c2c"  # Fondo principal gris oscuro suave
+secondaryBackgroundColor = "#756751"  # Fondo del sidebar, azul muy claro
+textColor = "#ffffff"  # Texto blanco
+font = "sans serif"
