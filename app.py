@@ -21,7 +21,7 @@ st.set_page_config(layout="wide", page_title="Hidrandina - Integrador", page_ico
 st.title("Pantalla de Predicción")
 
 # Sidebar
-st.sidebar.image("https://www.fonafe.gob.pe/pw_content/empresas/38/Img/Hidrandina.png")
+st.sidebar.image("Logo.png", use_column_width=True)
 st.sidebar.header("Hidrandina")
 st.sidebar.write("Pronóstico de Consumo Eléctrico en base a series de tiempo")
 st.sidebar.selectbox("Departamento", ["Ancash"], index=0)
