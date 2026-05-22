@@ -116,6 +116,7 @@ def aplicar_holt_winters(serie, seasonal_periods=12):
 # === Modelado (cacheado) ===
 @st.cache_resource(show_spinner="Entrenando ARIMA...")
 def entrenar_arima(serie_values, serie_index):
+    serie_index = pd.to_datetime(serie_index)
     serie = pd.Series(serie_values, index=serie_index)
     modelo = pm.auto_arima(
         serie,
@@ -130,6 +131,7 @@ def entrenar_arima(serie_values, serie_index):
 
 @st.cache_resource(show_spinner="Entrenando SARIMA...")
 def entrenar_sarima(serie_values, serie_index):
+    serie_index = pd.to_datetime(serie_index)
     serie = pd.Series(serie_values, index=serie_index)
     modelo = pm.auto_arima(
         serie,
@@ -143,6 +145,7 @@ def entrenar_sarima(serie_values, serie_index):
 
 @st.cache_resource(show_spinner="Entrenando Prophet...")
 def entrenar_prophet(serie_values, serie_index):
+    serie_index = pd.to_datetime(serie_index)
     df_prophet = pd.DataFrame({"ds": serie_index, "y": serie_values})
     modelo = Prophet()
     modelo.fit(df_prophet)
@@ -234,9 +237,20 @@ fechas_futuras = pd.date_range(
 )
 
 with st.spinner("Entrenando modelos... ⏳"):
-    pred_arima,  conf_arima,  fitted_arima  = entrenar_arima(serie.values, serie.index)
-    pred_sarima, conf_sarima, fitted_sarima = entrenar_sarima(serie.values, serie.index)
-    prophet_forecast                        = entrenar_prophet(serie.values, serie.index)
+     pred_arima, conf_arima, fitted_arima = entrenar_arima(
+        serie.values.tolist(),
+        serie.index.astype(str).tolist()
+    )
+
+    pred_sarima, conf_sarima, fitted_sarima = entrenar_sarima(
+        serie.values.tolist(),
+        serie.index.astype(str).tolist()
+    )
+
+    prophet_forecast = entrenar_prophet(
+        serie.values.tolist(),
+        serie.index.astype(str).tolist()
+    )
 
 # === Pestañas ===
 tabs = st.tabs(["📈 ARIMA", "📊 SARIMA", "🔮 Prophet"])
