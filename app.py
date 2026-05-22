@@ -49,7 +49,7 @@ def obtener_provincias():
     provincias.sort()
     return ["Todas"] + provincias
 
-@st.cache_data(show_spinner="Cargando datos...")
+@st.cache_resource(show_spinner="Cargando datos...")
 def cargar_datos(nombre: str) -> pd.DataFrame:
     if nombre == "Todas":
         nombre = "Total"
@@ -114,7 +114,7 @@ def aplicar_holt_winters(serie, seasonal_periods=12):
     return modelo.fit().fittedvalues
 
 # === Modelado (cacheado) ===
-@st.cache_data(show_spinner="Entrenando ARIMA...")
+@st.cache_resource(show_spinner="Entrenando ARIMA...")
 def entrenar_arima(serie_values, serie_index):
     serie = pd.Series(serie_values, index=serie_index)
     modelo = pm.auto_arima(
@@ -128,7 +128,7 @@ def entrenar_arima(serie_values, serie_index):
     fitted = modelo.predict_in_sample()
     return forecast, conf_int, fitted
 
-@st.cache_data(show_spinner="Entrenando SARIMA...")
+@st.cache_resource(show_spinner="Entrenando SARIMA...")
 def entrenar_sarima(serie_values, serie_index):
     serie = pd.Series(serie_values, index=serie_index)
     modelo = pm.auto_arima(
@@ -141,7 +141,7 @@ def entrenar_sarima(serie_values, serie_index):
     fitted = modelo.predict_in_sample()
     return forecast, conf_int, fitted
 
-@st.cache_data(show_spinner="Entrenando Prophet...")
+@st.cache_resource(show_spinner="Entrenando Prophet...")
 def entrenar_prophet(serie_values, serie_index):
     df_prophet = pd.DataFrame({"ds": serie_index, "y": serie_values})
     modelo = Prophet()
