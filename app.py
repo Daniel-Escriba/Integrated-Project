@@ -237,12 +237,10 @@ fechas_futuras = pd.date_range(
 )
 
 with st.spinner("Entrenando modelos... ⏳"):
-     pred_arima, conf_arima, fitted_arima = entrenar_arima(serie.values.tolist(),serie.index.astype(str).tolist())
-
+    pred_arima, conf_arima, fitted_arima = entrenar_arima(serie.values.tolist(),serie.index.astype(str).tolist())
     pred_sarima, conf_sarima, fitted_sarima = entrenar_sarima(serie.values.tolist(),serie.index.astype(str).tolist())
-
     prophet_forecast = entrenar_prophet(serie.values.tolist(),serie.index.astype(str).tolist())
-
+    
 # === Pestañas ===
 tabs = st.tabs(["📈 ARIMA", "📊 SARIMA", "🔮 Prophet"])
 
